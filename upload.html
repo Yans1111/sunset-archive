@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传夕阳 | 夕阳存档</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="icon">🌅</span> 夕阳存档
+    </a>
+    <div class="nav-links">
+      <div id="nav-guest" class="nav-user">
+        <a href="login.html"><button class="nav-btn ghost">登录</button></a>
+      </div>
+      <div id="nav-user" class="nav-user" style="display:none">
+        <div class="nav-avatar" id="nav-avatar">U</div>
+        <span id="nav-username" style="font-size:14px;color:var(--text-secondary)"></span>
+        <button class="nav-btn danger" onclick="handleLogout()">退出</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="upload-container">
+    <div class="upload-card">
+      <h2>📸 上传你的夕阳</h2>
+
+      <form onsubmit="handleUpload(event)">
+        <!-- Dropzone -->
+        <div class="upload-dropzone" onclick="document.getElementById('photo-file').click()"
+             ondragover="event.preventDefault();this.classList.add('dragover')"
+             ondragleave="this.classList.remove('dragover')"
+             ondrop="event.preventDefault();this.classList.remove('dragover');document.getElementById('photo-file').files=event.dataTransfer.files;previewFile(document.getElementById('photo-file'))">
+          <div class="icon">🌅</div>
+          <p>点击或拖拽图片到此处</p>
+          <p class="hint">支持 JPG / PNG / WebP，最大 5MB</p>
+          <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="previewFile(this)" required>
+        </div>
+
+        <!-- Preview -->
+        <div class="upload-preview" id="upload-preview">
+          <img id="preview-img" src="" alt="预览">
+        </div>
+
+        <!-- Title -->
+        <div class="form-group">
+          <label>标题（选填）</label>
+          <input type="text" id="photo-title" class="form-input" placeholder="给这片夕阳起个名字" maxlength="50">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label>描述（选填）</label>
+          <textarea id="photo-desc" class="form-input" placeholder="拍于哪里？当时的心情？" maxlength="300" oninput="document.getElementById('char-counter').textContent=this.value.length+'/300'"></textarea>
+          <div class="char-count" id="char-counter">0/300</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="upload-btn">发布</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

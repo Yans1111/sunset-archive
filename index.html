@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>夕阳存档 | Sunset Archive</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <span class="icon">🌅</span> 夕阳存档
+    </a>
+    <div class="nav-links">
+      <!-- Guest -->
+      <div id="nav-guest" class="nav-user">
+        <a href="login.html"><button class="nav-btn ghost">登录</button></a>
+        <a href="register.html"><button class="nav-btn primary">注册</button></a>
+      </div>
+      <!-- Logged In -->
+      <div id="nav-user" class="nav-user" style="display:none">
+        <a href="upload.html"><button class="nav-btn primary">📸 上传</button></a>
+        <div class="nav-avatar" id="nav-avatar">U</div>
+        <span id="nav-username" style="font-size:14px;color:var(--text-secondary)"></span>
+        <button class="nav-btn danger" onclick="handleLogout()">退出</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="main-content">
+    <!-- Hero -->
+    <div class="hero">
+      <h1>每一场夕阳都值得记录</h1>
+      <p>拍摄、分享、收藏你眼中的金色时刻</p>
+      <div class="hero-actions">
+        <a href="upload.html"><button class="nav-btn primary" style="padding:12px 28px;font-size:16px">📸 上传我的夕阳</button></a>
+        <a href="#gallery"><button class="nav-btn ghost" style="padding:12px 28px;font-size:16px">浏览作品</button></a>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" id="gallery">
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setFilter('latest')">最新</button>
+        <button class="filter-tab" onclick="setFilter('top')">最高评分</button>
+        <button class="filter-tab" onclick="setFilter('leaderboard')">🏆 排行榜</button>
+      </div>
+      <div class="filter-sort">
+        <select onchange="setSort(this.value)">
+          <option value="created_at">按时间</option>
+          <option value="rating">按评分</option>
+          <option value="votes">按投票</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="waterfall" id="photo-grid"></div>
+
+    <!-- Leaderboard (hidden by default) -->
+    <div id="leaderboard-section" style="display:none">
+      <div class="leaderboard" id="leaderboard-list"></div>
+    </div>
+  </div>
+
+  <!-- Photo Detail Modal -->
+  <div class="modal-overlay" id="photo-modal">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
