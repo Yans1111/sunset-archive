@@ -3,16 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>夕阳存档 | Sunset Archive</title>
+  <meta name="description" content="每一场夕阳都值得记录 - 拍摄、分享、收藏你眼中的金色时刻">
+  <meta name="theme-color" content="#ff6b35">
+  <title>看看我这里的夕阳 | Sunset Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <a href="index.html" class="nav-brand">
-      <span class="icon">🌅</span> 夕阳存档
+      <span class="icon">🌅</span> 看看我这里的夕阳
     </a>
     <div class="nav-links">
       <!-- Guest -->
@@ -22,9 +27,9 @@
       </div>
       <!-- Logged In -->
       <div id="nav-user" class="nav-user" style="display:none">
-        <a href="upload.html"><button class="nav-btn primary">📸 上传</button></a>
+        <a href="upload.html"><button class="nav-btn primary">📸 上传夕阳</button></a>
         <div class="nav-avatar" id="nav-avatar">U</div>
-        <span id="nav-username" style="font-size:14px;color:var(--text-secondary)"></span>
+        <span id="nav-username"></span>
         <button class="nav-btn danger" onclick="handleLogout()">退出</button>
       </div>
     </div>

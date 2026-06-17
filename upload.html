@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>上传夕阳 | 夕阳存档</title>
+  <title>上传夕阳 | 看看我这里的夕阳</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -11,7 +14,7 @@
 
   <nav class="navbar">
     <a href="index.html" class="nav-brand">
-      <span class="icon">🌅</span> 夕阳存档
+      <span class="icon">🌅</span> 看看我这里的夕阳
     </a>
     <div class="nav-links">
       <div id="nav-guest" class="nav-user">
@@ -31,10 +34,7 @@
 
       <form onsubmit="handleUpload(event)">
         <!-- Dropzone -->
-        <div class="upload-dropzone" onclick="document.getElementById('photo-file').click()"
-             ondragover="event.preventDefault();this.classList.add('dragover')"
-             ondragleave="this.classList.remove('dragover')"
-             ondrop="event.preventDefault();this.classList.remove('dragover');document.getElementById('photo-file').files=event.dataTransfer.files;previewFile(document.getElementById('photo-file'))">
+        <div class="upload-dropzone" id="upload-dropzone">
           <div class="icon">🌅</div>
           <p>点击或拖拽图片到此处</p>
           <p class="hint">支持 JPG / PNG / WebP，最大 5MB</p>
@@ -67,5 +67,28 @@
   <div class="toast-container" id="toast-container"></div>
 
   <script src="js/app.js"></script>
+  <script>
+    // Drag and drop event handlers (avoid deprecated global event)
+    (function() {
+      const dz = document.getElementById('upload-dropzone');
+      if (!dz) return;
+      dz.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dz.classList.add('dragover');
+      });
+      dz.addEventListener('dragleave', function() {
+        dz.classList.remove('dragover');
+      });
+      dz.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dz.classList.remove('dragover');
+        var files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          document.getElementById('photo-file').files = files;
+          previewFile(document.getElementById('photo-file'));
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
